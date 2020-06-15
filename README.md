@@ -1,6 +1,8 @@
 # Hamlet Framework / Json Mapper
 
-The most basic example is mapping of JSON structure like:
+[![Build Status](https://travis-ci.org/hamlet-framework/json-mapper.svg)](https://travis-ci.org/hamlet-framework/json-mapper)
+
+To map the following JSON structure:
 
 ```json
 [
@@ -9,7 +11,7 @@ The most basic example is mapping of JSON structure like:
 ]
 ```
 
-Into following class hierarchy:
+into the following class hierarchy:
 
 ```php
 <?php
@@ -33,7 +35,7 @@ class Address
 }
 ```
 
-which is accomplished by the following command. 
+use:
 
 ```php
 <?php

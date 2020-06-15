@@ -86,7 +86,6 @@ class JsonMapperConfiguration
      * @param string $type
      * @psalm-param class-string<T> $type
      * @param callable|int $setterNameResolver
-     * @psalm-param (callable(class-string<T>,string):string)|null $setterNameResolver
      * @return self
      */
     public function withPropertySetters(string $type, $setterNameResolver = JsonMapper::SETTER_DEFAULT)

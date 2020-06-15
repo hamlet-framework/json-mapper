@@ -22,6 +22,9 @@ class JsonMapperResolver extends DefaultResolver
 
     public function resolveSubType(string $type, $value, array $typesVisited = []): SubTypeResolution
     {
+        if ($type[0] == '\\') {
+            $type = substr($type, 1);
+        }
         if (!in_array($type, $typesVisited)) {
             $reflectionClass = $this->getReflectionClass($type);
             if ($reflectionClass->implementsInterface(JsonMapperAware::class)) {
