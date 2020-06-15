@@ -54,7 +54,8 @@ The third parameter of the `JsonMapper::map` is `JsonMapperConfiguration` used t
 
 ### Json Property
 
-```
+```php
+<?php
 $configuration
     ->withDefaultValue(User::class, 'name', 'unknown')
     ->withJsonName(User::class, 'homeAddress', 'home_address', 'homeaddress')
@@ -63,7 +64,8 @@ $configuration
 
 ### Using Setters
 
-```
+```php
+<?php
 $configuaration
     ->withPropertySetters(User::class)
     ->withPropertySetter(User::class, 'homeAddress', 'updateHomeAddress');
@@ -71,7 +73,8 @@ $configuaration
 
 ### Using Converter
 
-```
+```php
+<?php
 $configuration
     ->withConverter(User::class, 'time', function (int $unixtime) {
         return DateTimeImmutable::createFomFormat('U', (string) $unixtime);
@@ -86,7 +89,8 @@ $configuration
 
 ### Using Type Dispatcher 
 
-```
+```php
+<?php
 $configuration
     ->withTypeDispatcher(User::class, function ($properties) {
         if (isset($properties['name'])) {
@@ -97,8 +101,41 @@ $configuration
     });
 ```
 
-```
+```php
+<?php
 $coniguration
     ->withTypeDispatcher(User::class, '__resolveType');
 ```
 
+### Using JsonMapperAware interface
+
+If you want to keep your mapping configuration closer to the files you map, there's an option to implement `JsonMapperAware` interface
+
+```php
+<?php
+
+class Car implements JsonMapperAware
+{
+    /** @var string */
+    protected $make;
+
+    public function make(): string
+    {
+        return $this->make;
+    }
+
+    public static function configureJsonMapper(JsonMapperConfiguration $configuration): JsonMapperConfiguration
+    {
+        return $configuration
+            ->withTypeResolver(self::class, function ($properties) {
+                if (array_key_exists('machineGunCapacity', (array) $properties)) {
+                    return JamesBondCar::class;
+                } else {
+                    return Car::class;
+                }
+            });
+    }
+}
+
+$cars = JsonMapper::map(_list(_class(Car::class)), json_decode($payload));
+```
