@@ -1,0 +1,40 @@
+{
+  "name": "hamlet-framework/json-mapper",
+  "type": "library",
+  "description": "Json Data Binding",
+  "keywords": ["library", "json", "mapping"],
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Vasily Kartashov",
+      "email": "vasily@kartashov.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^7.0",
+    "hamlet-framework/type": "0.0.10"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "classmap-authoritative": true,
+    "sort-packages": true
+  },
+  "require-dev": {
+    "ext-json": "*",
+    "phpunit/phpunit": "^6 || ^7",
+    "squizlabs/php_codesniffer": "@stable",
+    "php-parallel-lint/php-parallel-lint": "@stable",
+    "vimeo/psalm": "@stable"
+  },
+  "autoload": {
+    "psr-4": {
+      "Hamlet\\JsonMapper\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Hamlet\\JsonMapper\\": "tests"
+    }
+  }
+}
