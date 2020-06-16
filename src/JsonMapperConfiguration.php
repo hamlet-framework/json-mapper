@@ -18,7 +18,7 @@ class JsonMapperConfiguration
 
     /**
      * @var array
-     * @psalm-var array<string,callable|true>
+     * @psalm-var array<string,callable|int>
      */
     private $classWidePropertySetters = [];
 
@@ -36,7 +36,7 @@ class JsonMapperConfiguration
 
     /**
      * @var callable[]
-     * @psalm-var array<string,callable>
+     * @psalm-var array<string,string|callable>
      */
     private $typeResolvers = [];
 
@@ -44,7 +44,7 @@ class JsonMapperConfiguration
     {
     }
 
-    public static function default()
+    public static function default(): self
     {
         return new self;
     }
@@ -59,7 +59,7 @@ class JsonMapperConfiguration
      * @psalm-param V $value
      * @return self
      */
-    public function withDefaultValue(string $type, string $property, $value)
+    public function withDefaultValue(string $type, string $property, $value): self
     {
         $copy = clone $this;
         $copy->defaultValues[$type][$property] = $value;
@@ -74,7 +74,7 @@ class JsonMapperConfiguration
      * @param string ...$names
      * @return self
      */
-    public function withJsonName(string $type, string $property, string ...$names)
+    public function withJsonName(string $type, string $property, string ...$names): self
     {
         $copy = clone $this;
         $copy->jsonNames[$type][$property] = $names;
@@ -88,10 +88,10 @@ class JsonMapperConfiguration
      * @param callable|int $setterNameResolver
      * @return self
      */
-    public function withPropertySetters(string $type, $setterNameResolver = JsonMapper::SETTER_DEFAULT)
+    public function withPropertySetters(string $type, $setterNameResolver = JsonMapper::SETTER_DEFAULT): self
     {
         $copy = clone $this;
-        $copy->classWidePropertySetters[$type] = $setterNameResolver ?? true;
+        $copy->classWidePropertySetters[$type] = $setterNameResolver;
         return $copy;
     }
 
@@ -103,7 +103,7 @@ class JsonMapperConfiguration
      * @param string $setterName
      * @return self
      */
-    public function withPropertySetter(string $type, string $property, string $setterName)
+    public function withPropertySetter(string $type, string $property, string $setterName): self
     {
         $copy = clone $this;
         $copy->propertySetters[$type][$property] = $setterName;
@@ -119,7 +119,7 @@ class JsonMapperConfiguration
      * @psalm-param callable(mixed):mixed $converter
      * @return self
      */
-    public function withConverter(string $type, string $property, callable $converter)
+    public function withConverter(string $type, string $property, callable $converter): self
     {
         $copy = clone $this;
         $copy->converters[$type][$property] = $converter;
@@ -131,10 +131,10 @@ class JsonMapperConfiguration
      * @param string $type
      * @psalm-param class-string<T> $type
      * @param callable|string $typeResolver
-     * @psalm-param string|(callable(stdClass|array):class-string<T>)
+     * @psalm-param string|callable $typeResolver
      * @return self
      */
-    public function withTypeResolver(string $type, $typeResolver)
+    public function withTypeResolver(string $type, $typeResolver): self
     {
         $copy = clone $this;
         $copy->typeResolvers[$type] = $typeResolver;

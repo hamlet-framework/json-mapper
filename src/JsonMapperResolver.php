@@ -5,6 +5,7 @@ namespace Hamlet\JsonMapper;
 use Hamlet\Cast\Resolvers\DefaultResolver;
 use Hamlet\Cast\Resolvers\SubTypeResolution;
 use Hamlet\Cast\Resolvers\ValueResolution;
+use ReflectionException;
 use RuntimeException;
 use stdClass;
 
@@ -20,6 +21,21 @@ class JsonMapperResolver extends DefaultResolver
         $this->configuration = $configuration;
     }
 
+    /**
+     * @template T
+     * @param string $type
+     * @psalm-param class-string<T> $type
+     * @param mixed $value
+     * @param string[] $typesVisited
+     * @psalm-param array<class-string<T>> $typesVisited
+     * @return SubTypeResolution
+     * @psalm-return SubTypeResolution<T>
+     * @throws ReflectionException
+     *
+     * @psalm-suppress ArgumentTypeCoercion
+     * @psalm-suppress InvalidReturnType
+     * @psalm-suppress InvalidReturnStatement
+     */
     public function resolveSubType(string $type, $value, array $typesVisited = []): SubTypeResolution
     {
         if ($type[0] == '\\') {
@@ -75,9 +91,13 @@ class JsonMapperResolver extends DefaultResolver
                     throw new RuntimeException('Invalid class wide JsonMapper ' . print_r($setterResolver, true));
                 }
                 if ($setter !== JsonMapper::SETTER_IGNORE) {
-                    $method = $this->getReflectionClass($type)->getMethod($setter);
-                    $method->invoke($object, $value);
-                    return $object;
+                    if (is_string($setter)) {
+                        $method = $this->getReflectionClass($type)->getMethod($setter);
+                        $method->invoke($object, $value);
+                        return $object;
+                    } else {
+                        throw new RuntimeException('Unsupported setter ' . var_export($setter, true));
+                    }
                 }
             }
         }
@@ -116,7 +136,7 @@ class JsonMapperResolver extends DefaultResolver
         if ($resolution) {
             $converters = $this->configuration->converters();
             if (isset($converters[$type][$propertyName])) {
-                $convertedValue = ($this->configuration->converters()[$type][$propertyName])($resolution->value());
+                $convertedValue = ($converters[$type][$propertyName])($resolution->value());
                 $resolution = ValueResolution::success($convertedValue);
             }
         }

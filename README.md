@@ -56,6 +56,7 @@ The third parameter of the `JsonMapper::map` is `JsonMapperConfiguration` used t
 
 ```php
 <?php
+
 $configuration
     ->withDefaultValue(User::class, 'name', 'unknown')
     ->withJsonName(User::class, 'homeAddress', 'home_address', 'homeaddress')
@@ -66,6 +67,7 @@ $configuration
 
 ```php
 <?php
+
 $configuaration
     ->withPropertySetters(User::class)
     ->withPropertySetter(User::class, 'homeAddress', 'updateHomeAddress');
@@ -75,6 +77,7 @@ $configuaration
 
 ```php
 <?php
+
 $configuration
     ->withConverter(User::class, 'time', function (int $unixtime) {
         return DateTimeImmutable::createFomFormat('U', (string) $unixtime);
@@ -91,6 +94,7 @@ $configuration
 
 ```php
 <?php
+
 $configuration
     ->withTypeDispatcher(User::class, function ($properties) {
         if (isset($properties['name'])) {
@@ -103,6 +107,7 @@ $configuration
 
 ```php
 <?php
+
 $coniguration
     ->withTypeDispatcher(User::class, '__resolveType');
 ```
@@ -139,3 +144,9 @@ class Car implements JsonMapperAware
 
 $cars = JsonMapper::map(_list(_class(Car::class)), json_decode($payload));
 ```
+
+## To do
+
+- Add validators
+- Add examples with psalm specs
+- Use a better parser for type resolving
