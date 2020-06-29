@@ -2,7 +2,18 @@
 
 [![Build Status](https://travis-ci.org/hamlet-framework/json-mapper.svg)](https://travis-ci.org/hamlet-framework/json-mapper)
 
-To map the following JSON structure:
+Quick Summary:
+
+* Support for _Psalm_ annotation types including object-like-arrays, union types, associative arrays etc.
+* Uses _PHP-Parser_ to resolves FQCN
+* Uses reflection by default
+* Reusable code-as-configuration
+* Supported polymorphism through subtype resolvers 
+* Cascading configuration options for subtree resolutions
+* Type safety: _Psalm_ will know that `JsonMapper::map(_list(_class(User::class)), ...)` returns `list<User>`.
+* Cast exception thrown for impossible casting
+
+As a start, to map the following JSON structure:
 
 ```json
 [
@@ -149,4 +160,4 @@ $cars = JsonMapper::map(_list(_class(Car::class)), json_decode($payload));
 
 - Add validators
 - Add examples with psalm specs
-- Use a better parser for type resolving
+- Add support for constructor methods
