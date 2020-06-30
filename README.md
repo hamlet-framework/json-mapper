@@ -89,6 +89,22 @@ $configuaration
 ```php
 <?php
 
+class User 
+{
+    /** @var DateTimeImmutable */
+    private $time;
+
+    /** @var array<string,string> */
+    private $preferences;
+
+    /** @var string|null */
+    private $email;
+}
+
+$json = '
+    { "time": 1593479541, "preferences": "{\"timeZone\":\"Russia/Moscow\"}", "email": "_.oO000_" }
+';
+
 $configuration
     ->withConverter(User::class, 'time', function (int $unixtime) {
         return DateTimeImmutable::createFomFormat('U', (string) $unixtime);
@@ -99,6 +115,12 @@ $configuration
     ->withConverter(self::class, 'email', function ($email) {
         return filter_var($email, FILTER_VALIDATE_EMAIL) ?: null;
     });
+
+$user = JsonMapper::map(_class(User::class), json_decode($json), $configuration);
+
+$user->preferences['timeZone'] == 'Russia/Moscow';
+$user->time instanceof DateTimeImmutable;
+$user->email === null;
 ```
 
 ### Using Type Dispatcher 
