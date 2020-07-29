@@ -113,23 +113,23 @@ class JsonMapperResolver extends DefaultResolver
         if (isset($jsonNames[$type][$propertyName])) {
             foreach ($jsonNames[$type][$propertyName] as $jsonProperty) {
                 if (is_object($source) && property_exists($source, $jsonProperty)) {
-                    $resolution = ValueResolution::success($source->{$jsonProperty});
+                    $resolution = ValueResolution::success($source->{$jsonProperty}, $jsonProperty);
                     break;
                 } elseif (is_array($source) && array_key_exists($propertyName, $source)) {
-                    $resolution = ValueResolution::success($source[$jsonProperty]);
+                    $resolution = ValueResolution::success($source[$jsonProperty], $jsonProperty);
                     break;
                 }
             }
         } elseif (is_object($source) && property_exists($source, $propertyName)) {
-            $resolution = ValueResolution::success($source->{$propertyName});
+            $resolution = ValueResolution::success($source->{$propertyName}, $propertyName);
         } elseif (is_array($source) && array_key_exists($propertyName, $source)) {
-            $resolution = ValueResolution::success($source[$propertyName]);
+            $resolution = ValueResolution::success($source[$propertyName], $propertyName);
         }
 
         if ($resolution === null) {
             $defaultValues = $this->configuration->defaultValues();
             if (isset($defaultValues[$type][$propertyName])) {
-                $resolution = ValueResolution::success($defaultValues[$type][$propertyName]);
+                $resolution = ValueResolution::success($defaultValues[$type][$propertyName], $propertyName);
             }
         }
 
@@ -137,7 +137,7 @@ class JsonMapperResolver extends DefaultResolver
             $converters = $this->configuration->converters();
             if (isset($converters[$type][$propertyName])) {
                 $convertedValue = ($converters[$type][$propertyName])($resolution->value());
-                $resolution = ValueResolution::success($convertedValue);
+                $resolution = ValueResolution::success($convertedValue, $resolution->sourceFieldName());
             }
         }
 
