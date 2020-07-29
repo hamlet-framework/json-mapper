@@ -4,11 +4,11 @@
 
 Quick Summary:
 
-* Support for _Psalm_ annotation types including object-like-arrays, union types, associative arrays etc.
-* Uses _PHP-Parser_ to resolves FQCN
+* _Psalm_ type specifications including object-like-arrays, union types, associative arrays etc.
+* _PHP-Parser_ for resolving FQCN
 * Uses reflection by default
 * Reusable code-as-configuration
-* Supported polymorphism through subtype resolvers 
+* Supports polymorphism through subtype resolvers 
 * Cascading configuration options for subtree resolutions
 * Type safety: _Psalm_ will know that `JsonMapper::map(_list(_class(User::class)), ...)` returns `list<User>`.
 * Cast exception thrown for impossible casting
@@ -180,6 +180,7 @@ $cars = JsonMapper::map(_list(_class(Car::class)), json_decode($payload));
 
 ## To do
 
+- Add support for `ignoreUnknown`
+- Add support for constructor methods
 - Add validators
 - Add examples with psalm specs
-- Add support for constructor methods

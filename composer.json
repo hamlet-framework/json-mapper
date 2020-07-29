@@ -10,10 +10,9 @@
       "email": "vasily@kartashov.com"
     }
   ],
-  "minimum-stability": "dev",
   "require": {
     "php": "^7.0",
-    "hamlet-framework/type": "0.1.0"
+    "hamlet-framework/type": ">= 0.2.0"
   },
   "config": {
     "optimize-autoloader": true,
@@ -23,8 +22,8 @@
   "require-dev": {
     "ext-json": "*",
     "phpunit/phpunit": "^6 || ^7",
-    "squizlabs/php_codesniffer": "@stable",
     "php-parallel-lint/php-parallel-lint": "@stable",
+    "squizlabs/php_codesniffer": "@stable",
     "vimeo/psalm": "@stable"
   },
   "autoload": {
