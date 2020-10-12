@@ -71,7 +71,7 @@ The third parameter of the `JsonMapper::map` is `JsonMapperConfiguration` used t
 $configuration
     ->withDefaultValue(User::class, 'name', 'unknown')
     ->withJsonName(User::class, 'homeAddress', 'home_address', 'homeaddress')
-    ->ingnoreUnknown(User::class);
+    ->ignoreUnknown(User::class);
 ```
 
 ### Using Setters
