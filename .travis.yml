@@ -9,6 +9,7 @@ php:
   - '7.4'
 
 before_script:
+  - composer self-update --rollback
   - composer update
   - composer info
 
