@@ -137,7 +137,9 @@ class JsonMapperResolver extends DefaultResolver
             $converters = $this->configuration->converters();
             if (isset($converters[$type][$propertyName])) {
                 $convertedValue = ($converters[$type][$propertyName])($resolution->value());
-                $resolution = ValueResolution::success($convertedValue, $resolution->sourceFieldName());
+                $sourceFieldName = $resolution->sourceFieldName();
+                assert($sourceFieldName !== null);
+                $resolution = ValueResolution::success($convertedValue, $sourceFieldName);
             }
         }
 
