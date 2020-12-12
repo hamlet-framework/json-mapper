@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.0",
+    "php": "^7 || ^8",
     "hamlet-framework/type": ">= 0.2.0"
   },
   "config": {
@@ -21,7 +21,7 @@
   },
   "require-dev": {
     "ext-json": "*",
-    "phpunit/phpunit": "^6 || ^7",
+    "phpunit/phpunit": "^6 || ^7 || ^8",
     "php-parallel-lint/php-parallel-lint": "@stable",
     "squizlabs/php_codesniffer": "@stable",
     "vimeo/psalm": "@stable"

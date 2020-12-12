@@ -7,11 +7,10 @@ php:
   - '7.2'
   - '7.3'
   - '7.4'
+  - '8.0snapshot'
 
 before_script:
-  - composer self-update --rollback
   - composer update
-  - composer info
 
 script:
   - ./vendor/bin/parallel-lint src
