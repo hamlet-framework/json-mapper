@@ -24,7 +24,8 @@
     "phpunit/phpunit": "^6 || ^7 || ^8",
     "php-parallel-lint/php-parallel-lint": "@stable",
     "squizlabs/php_codesniffer": "@stable",
-    "vimeo/psalm": "@stable"
+    "vimeo/psalm": "@stable",
+    "symfony/polyfill-mbstring": "1.20.0"
   },
   "autoload": {
     "psr-4": {
