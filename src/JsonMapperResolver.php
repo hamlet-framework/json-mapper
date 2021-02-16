@@ -113,10 +113,10 @@ class JsonMapperResolver extends DefaultResolver
         if (isset($jsonNames[$type][$propertyName])) {
             foreach ($jsonNames[$type][$propertyName] as $jsonProperty) {
                 if (is_object($source) && property_exists($source, $jsonProperty)) {
-                    $resolution = ValueResolution::success($source->{$jsonProperty}, $jsonProperty);
+                    $resolution = ValueResolution::success($source->{$jsonProperty}, $propertyName);
                     break;
-                } elseif (is_array($source) && array_key_exists($propertyName, $source)) {
-                    $resolution = ValueResolution::success($source[$jsonProperty], $jsonProperty);
+                } elseif (is_array($source) && array_key_exists($jsonProperty, $source)) {
+                    $resolution = ValueResolution::success($source[$jsonProperty], $propertyName);
                     break;
                 }
             }
