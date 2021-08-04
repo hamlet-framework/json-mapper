@@ -1,6 +1,10 @@
 # Hamlet Framework / Json Mapper
 
-[![Build Status](https://travis-ci.org/hamlet-framework/json-mapper.svg)](https://travis-ci.org/hamlet-framework/json-mapper)
+![CI Status](https://github.com/hamlet-framework/type/workflows/CI/badge.svg?branch=master&event=push)
+[![Packagist](https://img.shields.io/packagist/v/hamlet-framework/json-mapper.svg)](https://packagist.org/packages/hamlet-framework/json-mapper)
+[![Packagist](https://img.shields.io/packagist/dt/hamlet-framework/json-mapper.svg)](https://packagist.org/packages/hamlet-framework/json-mapper)
+[![Coverage Status](https://coveralls.io/repos/github/hamlet-framework/json-mapper/badge.svg?branch=master)](https://coveralls.io/github/hamlet-framework/json-mapper?branch=master)
+![Psalm coverage](https://shepherd.dev/github/hamlet-framework/json-mapper/coverage.svg?)
 
 Quick Summary:
 

@@ -1,0 +1,11 @@
+name: Shepherd
+
+on: [push, pull_request]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: shivammathur/setup-php@v2
+          - uses: actions/checkout@v2
+          - run: composer install --prefer-dist --no-progress --no-suggest
+          - run: vendor/bin/psalm --threads=2 --output-format=github --shepherd
