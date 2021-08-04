@@ -25,7 +25,6 @@ jobs:
         with:
           php-version: '8.0'
           ini-values: zend.assertions = 1
-          coverage: xdebug2
           tools: composer:v2
       - uses: actions/checkout@v2
       - run: composer update
