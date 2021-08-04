@@ -21,11 +21,10 @@
   },
   "require-dev": {
     "ext-json": "*",
-    "phpunit/phpunit": "^6 || ^7 || ^8",
+    "phpunit/phpunit": "^6 || ^7 || ^8 || ^9",
     "php-parallel-lint/php-parallel-lint": "@stable",
     "squizlabs/php_codesniffer": "@stable",
-    "vimeo/psalm": "@stable",
-    "symfony/polyfill-mbstring": "<=1.20.0"
+    "vimeo/psalm": "@stable"
   },
   "autoload": {
     "psr-4": {
